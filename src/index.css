@@ -1,0 +1,482 @@
+@import "tailwindcss";
+
+:root {
+  /* Tipografía oficial Bci */
+  --font-family: 'Overpass', Arial, sans-serif;
+  --font-bci: var(--font-family);
+
+  /* Tokens de Color Oficiales Bci */
+  --white: #FFFFFF;
+  --bci-white: #FFFFFF;
+  --black: rgba(0, 0, 0, 1);
+  --black-50: rgba(0, 0, 0, 0.5);
+
+  /* Verde Bci */
+  --green-dark: #28652B;
+  --green-normal: #28892B;
+  --green-80: #53A155;
+  --green-60: #7EB880;
+  --green-40: #A9D0AA;
+  --green-20: #D4E7D5;
+
+  /* Azul Bci */
+  --blue-dark: #1D5699;
+  --blue-normal: #2772CC;
+  --blue-80: #528ED6;
+  --blue-60: #7DAAE0;
+  --blue-40: #A9C7EB;
+  --blue-20: #D4E3F5;
+
+  /* Rojo Bci */
+  --red-normal: #ED0C19;
+  --red-80: #F13D47;
+  --red-60: #F46D75;
+  --red-40: #F89EA3;
+  --red-20: #FBCED1;
+
+  /* Amarillo Bci */
+  --yellow-normal: #FFE300;
+  --yellow-80: #FFE933;
+  --yellow-60: #FFEE66;
+  --yellow-40: #FFF499;
+  --yellow-20: #FFF9CC;
+
+  /* Gris Bci */
+  --gray-ultradark: #2C3A41;
+  --gray-dark: #37474F;
+  --gray-semidark: #546E7A;
+  --gray-neutral: #BBC5CA;
+  --gray-semilight: #E2E8EA;
+  --gray-light: #F6F7F8;
+
+  /* Transiciones y Sombras Bci */
+  --transition: all 0.3s ease;
+  --shadow-normal: 0px 2px 8px rgba(55, 71, 79, 0.2);
+  --shadow-small: 0px 1px 4px rgba(55, 71, 79, 0.25);
+  --border-xs: 0.188rem;
+  --border-md: 0.375rem;
+  --border-lg: 0.75rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-bci);
+  color: var(--gray-dark);
+  background-color: #E9EEF2;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+@media (max-width: 440px) {
+  html,
+  body {
+    background-color: var(--white);
+  }
+}
+
+body {
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   ESCALA TIPOGRÁFICA OFICIAL BCI (Valores Móvil <992px)
+   Nota: :where() previene que los selectores de etiquetas sobreescriban
+   clases de utilidad de Tailwind como text-white.
+   ========================================================================== */
+.display-1 {
+  font-size: 4rem; /* 64px */
+  line-height: 1.3;
+  font-weight: 400;
+}
+.display-2 {
+  font-size: 3.25rem; /* 52px */
+  line-height: 1.3;
+  font-weight: 400;
+}
+.display-3 {
+  font-size: 2.625rem; /* 42px */
+  line-height: 1.3;
+  font-weight: 400;
+}
+.display-4 {
+  font-size: 2.125rem; /* 34px */
+  line-height: 1.3;
+  font-weight: 400;
+}
+
+.h1 {
+  font-size: 1.875rem; /* 30px */
+  line-height: 1.3;
+  font-weight: 600;
+}
+.h2 {
+  font-size: 1.625rem; /* 26px */
+  line-height: 1.3;
+  font-weight: 600;
+}
+.h3 {
+  font-size: 1.375rem; /* 22px */
+  line-height: 1.3;
+  font-weight: 600;
+}
+.h4 {
+  font-size: 1.25rem; /* 20px */
+  line-height: 1.3;
+  font-weight: 600;
+}
+.h5 {
+  font-size: 1.125rem; /* 18px */
+  line-height: 1.3;
+  font-weight: 600;
+}
+.h6 {
+  font-size: 1rem; /* 16px */
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+:where(h1, h2, h3, h4, h5, h6) {
+  line-height: 1.3;
+  font-weight: 600;
+  color: inherit;
+}
+:where(h1) { font-size: 1.875rem; }
+:where(h2) { font-size: 1.625rem; }
+:where(h3) { font-size: 1.375rem; }
+:where(h4) { font-size: 1.25rem; }
+:where(h5) { font-size: 1.125rem; }
+:where(h6) { font-size: 1rem; }
+
+.regular-text {
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.5;
+}
+
+.sub-text,
+.sub-p {
+  font-size: 0.75rem; /* 12px (mínimo garantizado) */
+  line-height: 1.4;
+  color: var(--gray-semidark);
+}
+
+/* ==========================================================================
+   BOTONES BCI (Geometría, Diagramación y Bordes Redondeados)
+   - Diagramación: display: inline-flex, flex-row, nowrap, centrados, gap 8px
+   - Bordes redondeados: 14px según diseño de referencia adjunto
+   - Altura mínima táctil: 48px
+   ========================================================================== */
+.bci-btn,
+.btn-bci,
+.bci-btn-primary,
+.bci-btn-secondary,
+.bci-btn-login,
+.bci-btn-tertiary,
+.bci-btn-secondary-dark,
+.bci-btn-tertiary-light {
+  font-family: var(--font-bci);
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  min-height: 48px;
+  border-radius: 14px !important;
+  padding: 12px 20px;
+  display: inline-flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  border: 1.5px solid transparent;
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+}
+
+.bci-btn:focus-visible,
+.btn-bci:focus-visible,
+.bci-btn-primary:focus-visible,
+.bci-btn-secondary:focus-visible,
+.bci-btn-login:focus-visible,
+.bci-btn-tertiary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0px 3px var(--yellow-normal) !important;
+}
+
+.bci-btn:disabled,
+.btn-bci:disabled,
+.bci-btn-primary:disabled,
+.bci-btn-secondary:disabled,
+.bci-btn-login:disabled,
+.bci-btn-tertiary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed !important;
+  pointer-events: none;
+}
+
+/* Tamaños */
+.bci-btn-sm {
+  min-height: 44px;
+  padding: 8px 16px;
+  font-size: 14px;
+}
+.bci-btn-normal {
+  min-height: 48px;
+  padding: 12px 20px;
+  font-size: 16px;
+}
+.bci-btn-lg {
+  min-height: 52px;
+  padding: 14px 24px;
+  font-size: 16px;
+}
+
+/* 1. Botón Primario (Verde Bci) */
+.bci-btn-primary {
+  background-color: var(--green-normal) !important;
+  color: #FFFFFF !important;
+  border-color: var(--green-normal) !important;
+}
+.bci-btn-primary:hover:not(:disabled) {
+  background-color: var(--green-dark) !important;
+  border-color: var(--green-dark) !important;
+}
+.bci-btn-primary:active:not(:disabled) {
+  transform: scale(0.99);
+}
+.bci-btn-primary:disabled {
+  background-color: var(--gray-semilight) !important;
+  color: var(--gray-neutral) !important;
+  border-color: var(--gray-semilight) !important;
+}
+
+/* 2. Botón Secundario (Borde y fondo blanco) */
+.bci-btn-secondary {
+  background-color: var(--white) !important;
+  color: var(--gray-dark) !important;
+  border: 1.5px solid var(--gray-semilight) !important;
+}
+.bci-btn-secondary:hover:not(:disabled) {
+  border-color: var(--green-normal) !important;
+  background-color: var(--green-20) !important;
+  color: var(--green-dark) !important;
+}
+.bci-btn-secondary:active:not(:disabled) {
+  transform: scale(0.99);
+}
+.bci-btn-secondary:disabled {
+  background-color: var(--gray-light) !important;
+  color: var(--gray-neutral) !important;
+  border-color: var(--gray-semilight) !important;
+}
+
+/* 3. Botón Login (Azul Bci) */
+.bci-btn-login {
+  background-color: var(--blue-normal) !important;
+  color: #FFFFFF !important;
+  border-color: var(--blue-normal) !important;
+}
+.bci-btn-login:hover:not(:disabled) {
+  background-color: var(--blue-dark) !important;
+  border-color: var(--blue-dark) !important;
+}
+
+/* 4. Botón Secundario Dark (sobre fondo oscuro) */
+.bci-btn-secondary-dark {
+  background-color: var(--white) !important;
+  color: var(--green-normal) !important;
+  border-color: var(--white) !important;
+}
+.bci-btn-secondary-dark:hover:not(:disabled) {
+  background-color: var(--green-20) !important;
+  color: var(--green-normal) !important;
+  border-color: var(--green-20) !important;
+}
+
+/* 5. Botón Terciario */
+.bci-btn-tertiary {
+  background-color: transparent !important;
+  color: var(--gray-semidark) !important;
+  border-color: var(--gray-neutral) !important;
+}
+.bci-btn-tertiary:hover:not(:disabled) {
+  background-color: var(--gray-light) !important;
+  color: var(--gray-dark) !important;
+}
+
+/* 6. Botón Terciario Light (sobre fondo oscuro) */
+.bci-btn-tertiary-light {
+  background-color: transparent !important;
+  color: #FFFFFF !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+}
+.bci-btn-tertiary-light:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Spinner animado para estado loading de botones */
+.spinner-border {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  vertical-align: text-bottom;
+  border: 0.15em solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: bci-spinner .75s linear infinite;
+}
+.spinner-border-sm {
+  width: 0.875rem;
+  height: 0.875rem;
+  border-width: 0.12em;
+}
+@keyframes bci-spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================================================
+   INPUTS Y FORMULARIOS BCI
+   ========================================================================== */
+.form-control,
+.bci-input {
+  display: block;
+  width: 100%;
+  min-height: 50px;
+  padding: 0.375rem 0.75rem;
+  font-family: var(--font-bci);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--gray-semidark);
+  background-color: var(--white);
+  border: 1px solid var(--gray-neutral);
+  border-radius: 6px;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.form-control:hover,
+.bci-input:hover {
+  border: 1px solid var(--gray-semidark);
+}
+
+.form-control:focus,
+.bci-input:focus,
+.form-control:focus-visible,
+.bci-input:focus-visible {
+  outline: none;
+  border-color: var(--blue-normal);
+  box-shadow: 0 0 0 1px var(--blue-normal), 0 0 0 3px var(--yellow-normal);
+  background-color: var(--white);
+}
+
+.form-control::placeholder,
+.bci-input::placeholder {
+  color: var(--gray-neutral);
+}
+
+.form-control:disabled,
+.bci-input:disabled {
+  background-color: rgb(230, 230, 230);
+  cursor: not-allowed;
+}
+
+/* Buscador con ícono */
+.inner-search {
+  position: relative;
+  width: 100%;
+}
+.inner-search input {
+  padding-left: 36px;
+}
+
+/* Listas con Check Bci */
+.list-check {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+  list-style: none;
+  position: relative;
+}
+.list-check > li {
+  position: relative;
+  margin-bottom: 0.5rem;
+  padding-left: 0.5rem;
+}
+.list-check > li::before {
+  content: "✓";
+  position: absolute;
+  left: -1.25rem;
+  top: 0;
+  font-weight: 700;
+  color: var(--green-normal);
+}
+
+/* Foco accesible universal */
+:where(a:any-link, button):focus-visible {
+  outline: none;
+  box-shadow: 0 0 0px 3px var(--yellow-normal) !important;
+}
+
+/* Reglas nativas para <dialog> modal (Modern Web Guidance) */
+dialog:modal {
+  overscroll-behavior: contain;
+  border: none;
+  padding: 0;
+  background: transparent;
+  max-width: 430px;
+  width: 100%;
+  margin: auto auto 0 auto;
+}
+
+dialog::backdrop {
+  overflow: hidden;
+  overscroll-behavior: contain;
+  background: rgba(55, 71, 79, 0.52);
+  backdrop-filter: blur(2px);
+}
+
+.visually-hidden:where(:not(:focus-within, :active)) {
+  position: absolute !important;
+  clip-path: inset(50%) !important;
+  overflow: hidden !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
